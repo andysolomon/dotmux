@@ -1,83 +1,83 @@
-# remap prefix to Control + a
-unbind C-b
-set -g prefix C-a
-bind C-a send-prefix
-
-set-window-option -g mode-mouse on
-
+#  .tmux.conf
 set -g default-terminal "screen-256color"
-set -g history-limit 1000
+set -g mode-mouse on
 
-# reload
-bind-key r source-file ~/.tmux.conf
+#  # Reload key
+bind r source-file ~/.tmux.conf
 
-# hsplit
-unbind %
-bind | split-window -h
+#  # Set the starting window index to use 1
+set -g base-index 1
 
-# vsplit
-unbind '"'
-bind - split-window -v
+#  #Set escape time to 0
+set -s escape-time 0
 
-# Panes
-bind up resize-pane -U 5
-bind down resize-pane -D 5
-bind left resize-pane -L 5
-bind right resize-pane -R 5
-unbind space
-bind tab next-layout
-unbind C-o
-bind r rotate-window
+#  # Aggressive resize
+setw -g aggressive-resize on
 
-# use the vim motion keys to move between panes
+#  # Set status bar
+set -g status-bg black
+set -g status-fg white
+set -g status-left ""
+set -g status-right "#[fg=green]#H"
+
+#  # Highlight active window
+set-window-option -g window-status-current-bg red
+
+#  # unbinds
+unbind l
+unbind h
+unbind k
+unbind j
+unbind u
+unbind i
+
+#  # Reload key
+ bind r source-file ~/.tmux.conf
+
+#  # act like vim
+setw -g mode-keys vi
 bind h select-pane -L
 bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R
+bind-key -r C-h select-window -t :-
+bind-key -r C-l select-window -t :+
 
+#  # rebind the pane splitting bindings
+unbind % # Remove default binding since we’re replacing
+unbind "
+bind | split-window -h
+bind - split-window -v
 
-# highlight status bar on activity
-set -g visual-activity on
-
-# change foreground-background for the current window
-setw -g window-status-current-attr reverse
-setw -g monitor-activity on
-
-
-setw -g mode-keys vi
-
-# Commands
-bind-key S command-prompt -p "ssh: " "new-window -n %1 'ssh %1'"
-
-# Titles {{{
-set-option -g set-titles on
-set-option -g set-titles-string '#W(#P) - #T'
-set-window-option -g automatic-rename on
-# }}}
-
-# Options {{{
-set-option -g base-index 1
-#set-option -g default-command "exec /usr/bin/login -pf superflo"
-set-option -g mouse-select-pane on
-set-option -g pane-active-border-fg black
-set-option -g pane-active-border-bg cyan
-set-option -g pane-border-fg white
-set-option -g pane-border-bg black
-#set-option -g default-shell /bin/bash
-set-option -g status-keys vi
-set-option -g history-limit 4096
-set-option -s escape-time 100
-
-
-# Set status bar
-# set -g status-bg black
+#  # default statusbar colors
 set -g status-fg white
-set -g status-left '#[fg=green]#'
+set -g status-bg black
+set -g status-attr default
+#  # default window title colors
+set-window-option -g window-status-fg white
+set-window-option -g window-status-bg black
+set-window-option -g window-status-attr dim
+#  # active window title colors
+set-window-option -g window-status-current-fg white
+set-window-option -g window-status-current-bg default
+set-window-option -g window-status-current-attr bright
+#  # command/message line colors
+set -g message-fg white
+set -g message-bg black
+set -g message-attr bright
+set -g status-left "#[fg=white,bg=black,bright]#H
+#  #[default,fg=white,bg=black]|#[default]"
+set -g status-left-length 12
+set -g status-right
+#  "#[default,fg=white,bg=black]|#[fg=white,bg=black,bright]%a %d.%m
+#  %H:%M#[default]"
+set -g status-right-length 50
+#  # Highlight active window
 set-window-option -g window-status-current-bg red
 
-# Set window notifications
+#  # Set window notifications
 setw -g monitor-activity on
 set -g visual-activity on
 
-
-# }}}
+#  # Automatically set window title
+ setw -g automatic-rename"
