@@ -33,6 +33,7 @@ unbind i
 
 #  # Reload key
  bind r source-file ~/.tmux.conf
+bind r source-file ~/.tmux.conf
 
 #  # act like vim
 setw -g mode-keys vi
