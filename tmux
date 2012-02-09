@@ -2,7 +2,7 @@
 set-option -g prefix C-a
 
 # C-a C-a for the Last Active Window
-bind-key C-a last-window
+# bind-key C-a last-window
 
 set -g base-index 1
 
