@@ -15,14 +15,38 @@ set -s escape-time 0
 #  Aggressive resize
 setw -g aggressive-resize on
 
-#  Set status bar
-set -g status-bg black
-set -g status-fg white
-set -g status-left ""
-set -g status-right "#[fg=green]#H"
+# statusbar --------------------------------------------------------------
+set -g status-interval 1
+set -g status-justify centre # center align window list
+set -g status-left-length 20
+set -g status-left '#[fg=green] #H #[fg=black]• #[fg=green,bright]#(uname -r | cut -c 1-6)#[default]'
+set -g status-right '#[fg=blue,bright]Up#(uptime | cut -f 4-5 -d " " | cut -f 1 -d ",") #[fg=black]• #[fg=cyan,bright]#(cut -d " " -f 1-4 /proc/loadavg) '
 
-#  Highlight active window
-set-window-option -g window-status-current-bg red
+# default statusbar colors
+set -g status-fg white
+set -g status-bg default
+set -g status-attr bright
+
+# default window title colors
+set-window-option -g window-status-fg white
+set-window-option -g window-status-bg default
+set-window-option -g window-status-attr dim
+
+# active window title colors
+set-window-option -g window-status-current-fg white
+set-window-option -g window-status-current-bg default
+set-window-option -g window-status-current-attr bright
+
+# command/message line colors
+set -g message-fg white
+set -g message-bg black
+set -g message-attr bright
+
+# listen for activity on all windows
+set -g bell-action any
+
+# on-screen time for display-panes in ms
+set -g display-panes-time 2000
 
 # Notifying if other windows has activities
 setw -g monitor-activity on
@@ -39,6 +63,11 @@ unbind k
 unbind j
 unbind u
 unbind i
+
+# set vi keys
+unbind [
+bind Escape copy-mode
+setw -g mode-keys vi
 
 #  act like vim
 set -g status-keys vi
