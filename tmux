@@ -1,10 +1,13 @@
-set-option -g default-command "reattach-to-user-namespace -l zsh"
 # Terminal junks!
 set -g default-terminal "screen-256color"
 
 # set-option -g prefix C-a
 unbind C-b
 set-option -g prefix C-a
+
+# quick pane cycling
+unbind ^A
+bind ^A select-pane -t :.+
 
 # reload config
 unbind r
