@@ -1,3 +1,4 @@
+set-option -g default-command "reattach-to-user-namespace -l zsh"
 # Terminal junks!
 set -g default-terminal "screen-256color"
 
