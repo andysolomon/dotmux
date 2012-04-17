@@ -1,6 +1,10 @@
 # Terminal junks!
 set -g default-terminal "screen-256color"
 
+# Use ZSH
+set -g default-shell /bin/zsh
+set -g default-command /bin/zsh
+
 # set-option -g prefix C-a
 unbind C-b
 set-option -g prefix C-a
@@ -12,7 +16,6 @@ bind ^A select-pane -t :.+
 # reload config
 unbind r
 bind r source-file ~/.tmux.conf
-
 set -g base-index 1
 
 # Set escape time to 0
@@ -101,6 +104,14 @@ bind Up resize-pane -U 4
 unbind Down
 bind Down resize-pane -D 4
 
+# Copy and pasting
+bind -t vi-copy 'v' begin-selection
+bind -t vi-copy 'y' copy-selection
+
+# move between tmux sessions (tmux > 1.4)
+bind P switch-client -p
+bind N switch-client -n
+bind L switch-client -l
 
 # Default bindings:
 # C-b         Send the prefix key (C-b) through to the application.
